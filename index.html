@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>大腦健身房</title>
+  <title>截稿倒數60秒</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,24 +11,17 @@
   <!-- ══════════ 開始畫面 ══════════ -->
   <div id="screen-start" class="screen active">
     <div class="start-wrap">
-      <div class="logo-box">腦</div>
-      <h1 class="game-title">大腦健身房</h1>
-      <p class="game-sub">字音字形・活化大腦</p>
+      <div class="logo-box">稿</div>
+      <h1 class="game-title">截稿倒數60秒</h1>
+      <p class="game-sub">主編之眼，校稿出擊！</p>
 
-      <p class="diff-label">選擇難度</p>
-      <div class="diff-row">
-        <button class="diff-btn active" data-diff="1">易</button>
-        <button class="diff-btn"        data-diff="2">中</button>
-        <button class="diff-btn"        data-diff="3">難</button>
-      </div>
-
-      <div class="rule-row">
+<div class="rule-row">
         <div class="rule-chip"><span class="icon">⏱</span>60 秒限時</div>
-        <div class="rule-chip"><span class="icon">❤️</span><span id="rule-hearts">3 顆心</span></div>
-        <div class="rule-chip"><span class="icon">⏱</span><span id="rule-per-q">每題 10 秒</span></div>
+        <div class="rule-chip"><span class="icon">❤️</span>3 顆心</div>
+        <div class="rule-chip"><span class="icon">🔍</span>找錯字</div>
       </div>
 
-      <button id="start-btn" class="btn-primary">開始挑戰</button>
+      <button id="start-btn" class="btn-primary">開始校對</button>
       <button id="lb-open-btn" class="btn-ghost">查看排行榜 🏆</button>
     </div>
   </div>
@@ -47,6 +40,7 @@
       <div class="score-block">
         <div class="score-label">分數</div>
         <div class="score-num" id="score-display">0</div>
+        <div class="rank-display" id="rank-display">實習校稿員</div>
       </div>
     </div>
 
@@ -55,14 +49,17 @@
     </div>
 
     <div class="question-area">
-      <span class="type-badge" id="question-type-badge">字音</span>
-      <p class="question-text" id="question-text"></p>
+      <p class="question-text" id="question-text">請找出文句中的錯字：</p>
     </div>
 
-    <div class="options-grid" id="options-grid"></div>
+    <div class="char-tiles-area" id="char-tiles-area" style="display:none">
+      <p class="ec-hint" id="ec-hint"></p>
+      <div class="char-tiles" id="char-tiles"></div>
+      <button id="char-confirm-btn" class="handwrite-submit-btn">確認</button>
+    </div>
 
     <div class="explanation" id="explanation" style="display:none">
-      <div class="answer-label">✅ 正確答案：<span id="answer-display"></span></div>
+      <div class="answer-label" id="answer-label">✅ 正確答案：<span id="answer-display"></span></div>
       <div class="explanation-body" id="explanation-text"></div>
     </div>
 
@@ -71,31 +68,35 @@
   <!-- ══════════ 結算畫面 ══════════ -->
   <div id="screen-end" class="screen">
     <div class="end-wrap">
-      <div class="end-icon"  id="end-icon">⏰</div>
-      <h2 class="end-title"  id="end-title">時間到！</h2>
+      <div class="end-icon" id="end-icon">⏰</div>
+      <h2 class="end-title" id="end-title">截稿時間到！</h2>
       <div class="final-score" id="final-score">0</div>
       <p class="unit-label">分</p>
 
+      <div class="end-rank-badge" id="end-rank">實習校稿員</div>
+
+      <div class="rank-ladder" id="rank-ladder"></div>
+
       <div class="stats-row">
         <div class="stat">
-          <span class="stat-val"   id="stat-correct">0</span>
+          <span class="stat-val" id="stat-correct">0</span>
           <span class="stat-label">答對</span>
         </div>
         <div class="stat">
-          <span class="stat-val"   id="stat-total">0</span>
+          <span class="stat-val" id="stat-total">0</span>
           <span class="stat-label">作答</span>
         </div>
         <div class="stat">
-          <span class="stat-val"   id="stat-acc">0%</span>
+          <span class="stat-val" id="stat-acc">0%</span>
           <span class="stat-label">正確率</span>
         </div>
       </div>
 
       <div class="new-record" id="new-record" style="display:none">🎉 新紀錄！</div>
 
-      <button id="replay-btn"      class="btn-primary">再玩一次</button>
-      <button id="end-lb-btn"      class="btn-ghost">查看排行榜 🏆</button>
-      <button id="change-diff-btn" class="btn-ghost">更換難度</button>
+      <button id="replay-btn" class="btn-primary">再校一輪</button>
+      <button id="end-lb-btn" class="btn-ghost">查看排行榜 🏆</button>
+      <button id="home-btn" class="btn-ghost">返回首頁</button>
     </div>
   </div>
 

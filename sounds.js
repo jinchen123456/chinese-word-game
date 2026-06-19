@@ -79,4 +79,12 @@ const sounds = {
     const t = ac().currentTime;
     [392, 370, 330, 294].forEach((f, i) => note(f, t + i * 0.22, 0.24, 0.20));
   },
+
+  // 升職：三音上升，輕快
+  levelUp() {
+    const t = ac().currentTime;
+    note(659, t,       0.10, 0.20);
+    note(784, t+0.12,  0.10, 0.22);
+    note(1047, t+0.24, 0.20, 0.26);
+  },
 };
