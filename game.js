@@ -1,11 +1,14 @@
 const GLOBAL_TIME = 60;
 const PER_Q_TIME  = 10;
 
+const BOSS_MIN = 1000;
+
 const LEVELS = [
-  { min: 0,   title: '實習校稿員',  icon: '📝' },
-  { min: 200, title: '校稿編輯',    icon: '✏️' },
-  { min: 550, title: '特約校稿主編', icon: '📋' },
-  { min: 950, title: '客座金牌主編', icon: '🥇' },
+  { min: 0,        title: '實習校稿員',    icon: '📝', boss: false },
+  { min: 150,      title: '特約校稿',      icon: '✏️', boss: false },
+  { min: 400,      title: '資深編輯',      icon: '📋', boss: false },
+  { min: 750,      title: '校稿主編',      icon: '🏅', boss: false },
+  { min: BOSS_MIN, title: '金牌主編挑戰賽', icon: '🥇', boss: true  },
 ];
 
 function getLevel(score) {
@@ -33,7 +36,7 @@ function el(id) { return document.getElementById(id); }
 // ─── question picking ──────────────────────────────────
 
 function pickQuestion() {
-  const isBossLevel = state.score >= 550;
+  const isBossLevel = state.score >= BOSS_MIN;
 
   if (isBossLevel) {
     const bossPool = questions.filter(q => q.type === 'boss' && !globalSeenIds.has(q.id));
@@ -124,7 +127,7 @@ function loadQuestion() {
   state.selectedTiles = new Set();
 
   const isBoss = q.type === 'boss';
-  el('question-text').textContent = isBoss ? '⚔️ 魔王題！請找出文句中的兩個錯字：' : '請找出文句中的錯字：';
+  el('question-text').textContent = isBoss ? '🥇 金牌挑戰！請找出文句中的兩個錯字：' : '請找出文句中的錯字：';
   el('explanation').style.display = 'none';
   el('char-tiles-area').style.display = 'flex';
   el('ec-hint').textContent = `含 ${q.errors.length} 個錯字，請點選後按確認`;
@@ -345,13 +348,17 @@ function endGame(reason) {
   el('rank-ladder').innerHTML = LEVELS.slice().reverse().map(lv => {
     const isCurrent  = lv.min === finalLevel.min;
     const isAchieved = state.score >= lv.min;
-    const cls = isCurrent ? 'rl-row rl-current' : isAchieved ? 'rl-row rl-achieved' : 'rl-row';
+    const bossExtra  = lv.boss ? ' rl-boss' : '';
+    const cls = isCurrent
+      ? `rl-row rl-current${bossExtra}`
+      : isAchieved ? `rl-row rl-achieved${bossExtra}` : `rl-row${bossExtra}`;
     const right = isCurrent
       ? `<span class="rl-here">← 你在這裡</span>`
-      : `<span class="rl-min">${lv.min} 分以上</span>`;
+      : `<span class="rl-min">${lv.min} 分</span>`;
+    const badge = lv.boss ? `<span class="rl-boss-tag">雙錯字</span>` : '';
     return `<div class="${cls}">
       <span class="rl-icon">${lv.icon}</span>
-      <span class="rl-title">${lv.title}</span>
+      <span class="rl-title">${lv.title}${badge}</span>
       ${right}
     </div>`;
   }).join('');
