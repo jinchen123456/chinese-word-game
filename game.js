@@ -294,6 +294,19 @@ function loadScores() {
   catch { return []; }
 }
 
+function recordDailyStreak() {
+  const STREAK_KEY = 'cw_charger_streak';
+  const today = new Date().toLocaleDateString('zh-TW');
+  try {
+    const s = JSON.parse(localStorage.getItem(STREAK_KEY)) || { days: 0, lastDate: '' };
+    const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('zh-TW');
+    if (s.lastDate === today) return;
+    s.days = s.lastDate === yesterday ? s.days + 1 : 1;
+    s.lastDate = today;
+    localStorage.setItem(STREAK_KEY, JSON.stringify(s));
+  } catch {}
+}
+
 function saveScore(entry) {
   const scores = loadScores();
   scores.push(entry);
@@ -368,6 +381,7 @@ function endGame(reason) {
     : 0;
   el('stat-acc').textContent = acc + '%';
 
+  recordDailyStreak();
   const isRecord = isNewRecord(state.score);
   const today = new Date().toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' });
   saveScore({
@@ -391,7 +405,7 @@ function endGame(reason) {
 
 el('start-btn').addEventListener('click', () => { initState(); startGame(); });
 el('replay-btn').addEventListener('click', () => { initState(); startGame(); });
-el('home-btn').addEventListener('click', () => showScreen('screen-start'));
+el('home-btn').addEventListener('click', () => { window.location.href = 'index.html'; });
 
 el('lb-open-btn').addEventListener('click', () => { renderLeaderboard(); showScreen('screen-lb'); });
 el('end-lb-btn').addEventListener('click',  () => { renderLeaderboard(); showScreen('screen-lb'); });

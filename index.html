@@ -3,131 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>截稿倒數60秒</title>
-  <link rel="stylesheet" href="style.css">
+  <title>天下充電樁</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="lobby.css">
 </head>
 <body>
 
-  <!-- ══════════ 開始畫面 ══════════ -->
-  <div id="screen-start" class="screen active">
-    <div class="start-wrap">
+<div class="lobby-wrap">
 
-      <!-- 背景飄動裝飾 -->
-      <div class="start-deco" aria-hidden="true">
-        <span class="deco-item di-1">📄</span>
-        <span class="deco-item di-2">✏️</span>
-        <span class="deco-item di-3">☕</span>
-        <span class="deco-item di-4">⏰</span>
-        <span class="deco-item di-5">📰</span>
-        <span class="deco-item di-6">🖊️</span>
-        <span class="deco-item di-7">📄</span>
-        <span class="deco-item di-8">📎</span>
-        <span class="deco-item di-9">✂️</span>
-        <span class="deco-item di-10">☕</span>
+  <!-- ── 品牌識別 ── -->
+  <div class="lobby-header">
+    <div class="brand-row">
+      <div class="brand-icon"><span>⚡</span></div>
+      <div>
+        <div class="brand-name">天下充電樁</div>
+        <div class="brand-sub">CW POWER STATION</div>
       </div>
-
-      <div class="logo-box">稿</div>
-      <h1 class="game-title">截稿倒數60秒</h1>
-      <p class="game-sub">主編之眼，校稿出擊！</p>
-
-      <div class="rule-row">
-        <div class="rule-chip"><span class="icon">⏱</span>60 秒限時</div>
-        <div class="rule-chip"><span class="icon">❤️</span>3 顆心</div>
-        <div class="rule-chip"><span class="icon">🔍</span>找錯字</div>
-      </div>
-
-      <button id="start-btn" class="btn-primary">開始校對</button>
-      <button id="lb-open-btn" class="btn-ghost">查看排行榜 🏆</button>
     </div>
+    <p class="brand-tagline">
+      三分鐘，為你的閱讀力與時事力充電。<br>
+      不考試、不排名壓力，輕鬆玩，悄悄變強。
+    </p>
   </div>
 
-  <!-- ══════════ 遊戲畫面 ══════════ -->
-  <div id="screen-game" class="screen">
-
-    <div class="top-bar">
-      <div class="hearts" id="hearts-display">❤️❤️❤️</div>
-
-      <div class="timer-block">
-        <div class="bar-label">剩餘時間</div>
-        <div class="timer-num" id="global-timer">60</div>
-      </div>
-
-      <div class="score-block">
-        <div class="score-label">分數</div>
-        <div class="score-num" id="score-display">0</div>
-        <div class="rank-display" id="rank-display">實習校稿員</div>
-      </div>
-    </div>
-
-    <div class="bar-wrap">
-      <div class="per-q-bar" id="per-q-bar"></div>
-    </div>
-
-    <div class="question-area">
-      <p class="question-text" id="question-text">請找出文句中的錯字：</p>
-    </div>
-
-    <div class="char-tiles-area" id="char-tiles-area" style="display:none">
-      <p class="ec-hint" id="ec-hint"></p>
-      <div class="char-tiles" id="char-tiles"></div>
-      <button id="char-confirm-btn" class="handwrite-submit-btn">確認</button>
-    </div>
-
-    <div class="explanation" id="explanation" style="display:none">
-      <div class="answer-label" id="answer-label">✅ 正確答案：<span id="answer-display"></span></div>
-      <div class="explanation-body" id="explanation-text"></div>
-    </div>
-
+  <!-- ── 連續挑戰 ── -->
+  <div class="streak-bar">
+    <span class="streak-icon">🔥</span>
+    <span class="streak-text" id="streak-text">今日尚未充電</span>
+    <span class="streak-count" id="streak-count"></span>
   </div>
 
-  <!-- ══════════ 結算畫面 ══════════ -->
-  <div id="screen-end" class="screen">
-    <div class="end-wrap">
-      <div class="end-icon" id="end-icon">⏰</div>
-      <h2 class="end-title" id="end-title">截稿時間到！</h2>
-      <div class="final-score" id="final-score">0</div>
-      <p class="unit-label">分</p>
+  <!-- ── 遊戲選單 ── -->
+  <div class="section-title">選擇充電模式</div>
 
-      <div class="end-rank-badge" id="end-rank">實習校稿員</div>
+  <div class="game-cards">
 
-      <div class="rank-ladder" id="rank-ladder"></div>
-
-      <div class="stats-row">
-        <div class="stat">
-          <span class="stat-val" id="stat-correct">0</span>
-          <span class="stat-label">答對</span>
-        </div>
-        <div class="stat">
-          <span class="stat-val" id="stat-total">0</span>
-          <span class="stat-label">作答</span>
-        </div>
-        <div class="stat">
-          <span class="stat-val" id="stat-acc">0%</span>
-          <span class="stat-label">正確率</span>
+    <!-- 截稿倒數60秒 -->
+    <a class="game-card card-proofreading" href="proofreading.html">
+      <div class="card-top">
+        <div class="card-emoji">📰</div>
+        <div class="card-meta">
+          <span class="card-tag">文字力 · 60秒</span>
+          <div class="card-title">截稿倒數60秒</div>
         </div>
       </div>
+      <p class="card-desc">
+        你是主編，你的眼睛是最後防線。<br>
+        60 秒內揪出文句裡的錯別字，<br>
+        從實習校稿員一路晉升金牌主編。
+      </p>
+      <div class="card-footer">
+        <div class="card-chips">
+          <span class="chip">⏱ 60秒限時</span>
+          <span class="chip">❤️ 3顆心</span>
+          <span class="chip">🥇 5階職位</span>
+        </div>
+        <button class="card-btn" onclick="event.preventDefault(); window.location.href='proofreading.html'">
+          <span class="card-btn-label">開始</span>
+        </button>
+      </div>
+    </a>
 
-      <div class="new-record" id="new-record" style="display:none">🎉 新紀錄！</div>
-
-      <button id="replay-btn" class="btn-primary">再校一輪</button>
-      <button id="end-lb-btn" class="btn-ghost">查看排行榜 🏆</button>
-      <button id="home-btn" class="btn-ghost">返回首頁</button>
+    <!-- 時事解毒室 -->
+    <div class="game-card card-quiz coming-soon">
+      <div class="card-top">
+        <div class="card-emoji">🧪</div>
+        <div class="card-meta">
+          <span class="card-tag">時事力 · 新聞識讀</span>
+          <div class="card-title">時事解毒室</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        新聞太多、資訊太亂，你分得清真假嗎？<br>
+        每週精選時事題，三分鐘解毒一次，<br>
+        讓你看新聞更清醒、更有觀點。
+      </p>
+      <div class="card-footer">
+        <div class="card-chips">
+          <span class="chip">📅 每週更新</span>
+          <span class="chip">🔍 新聞解析</span>
+        </div>
+        <span class="coming-badge">即將推出</span>
+      </div>
     </div>
+
   </div>
 
-  <!-- ══════════ 排行榜畫面 ══════════ -->
-  <div id="screen-lb" class="screen">
-    <div class="lb-header">
-      <button id="lb-back-btn" class="lb-back-btn">‹ 返回</button>
-      <h2 class="lb-title">排行榜</h2>
-      <button id="lb-clear-btn" class="lb-clear-btn">清除</button>
-    </div>
-    <div class="lb-list" id="lb-list"></div>
-    <p class="lb-empty" id="lb-empty" style="display:none">還沒有紀錄，快去挑戰吧！</p>
+  <!-- ── 品牌說明 ── -->
+  <div class="about-block">
+    <div class="about-title">關於天下充電樁</div>
+    <p class="about-text">
+      閱讀不該有壓力。<strong>天下充電樁</strong>把媒體識讀的能力，
+      拆解成每天三分鐘的小挑戰——
+      不用硬背、不用考試，玩著玩著就充到了。
+    </p>
   </div>
 
-  <script src="questions.js"></script>
-  <script src="sounds.js"></script>
-  <script src="game.js"></script>
+</div>
+
+<script>
+// 連續充電天數（跨遊戲共用 key）
+const STREAK_KEY = 'cw_charger_streak';
+
+function getStreak() {
+  try { return JSON.parse(localStorage.getItem(STREAK_KEY)) || { days: 0, lastDate: '' }; }
+  catch { return { days: 0, lastDate: '' }; }
+}
+
+function updateStreakDisplay() {
+  const today = new Date().toLocaleDateString('zh-TW');
+  const s = getStreak();
+  const streakText  = document.getElementById('streak-text');
+  const streakCount = document.getElementById('streak-count');
+
+  if (s.lastDate === today) {
+    streakText.textContent  = '今日已充電 ✓';
+    streakCount.textContent = s.days > 1 ? `🔥 連續 ${s.days} 天` : '';
+  } else {
+    streakText.textContent  = '今日尚未充電';
+    streakCount.textContent = s.days > 0 ? `上次連續 ${s.days} 天` : '';
+  }
+}
+
+updateStreakDisplay();
+</script>
+
 </body>
 </html>
