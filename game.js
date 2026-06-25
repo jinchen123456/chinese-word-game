@@ -296,14 +296,22 @@ function loadScores() {
 
 function recordDailyStreak() {
   const STREAK_KEY = 'cw_charger_streak';
+  const PLAYED_KEY = 'cw_played_today';
   const today = new Date().toLocaleDateString('zh-TW');
   try {
+    // streak
     const s = JSON.parse(localStorage.getItem(STREAK_KEY)) || { days: 0, lastDate: '' };
     const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('zh-TW');
-    if (s.lastDate === today) return;
-    s.days = s.lastDate === yesterday ? s.days + 1 : 1;
-    s.lastDate = today;
-    localStorage.setItem(STREAK_KEY, JSON.stringify(s));
+    if (s.lastDate !== today) {
+      s.days = s.lastDate === yesterday ? s.days + 1 : 1;
+      s.lastDate = today;
+      localStorage.setItem(STREAK_KEY, JSON.stringify(s));
+    }
+    // record which game was played today (for energy board)
+    const played = JSON.parse(localStorage.getItem(PLAYED_KEY)) || {};
+    if (!played[today]) played[today] = {};
+    played[today].proofreading = true;
+    localStorage.setItem(PLAYED_KEY, JSON.stringify(played));
   } catch {}
 }
 
